@@ -23,7 +23,7 @@
       "r_G": "20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16",
       "G": "26508f76b759063e3e20f28afcbc769215144e0235f33cfe8c638466ee421c92",
       "G_r": "28f32225a914076baac673d8791859e215b5a467a540b83a4d15621b7b28fbf1",
-      "H_monthlyRepaymentTable": "ed26e03ffd2e756678cbdd2ee32d683257365140a43a43e7850020e142fd3a2",
+      "H_monthlyRepaymentTable": "131bff4e3bbab3c38e7961682919cf9920fa6a49e8d03170f290018596dbd7c7",
       "r_debtorPKE": "38457e3d3b03ec18bcc5b240bd372497bb832de18b235f22c2f4340b0afe938",
       "r_CT_SKE_bondBalance": "448172f1e79b205c97d4e332d53ba0eb5c27a1a9612244d939a4d44e1156915",
       "r_CT_SKE_bondData": "3534002ed541aaea00743a8fe7b6dd1c19b0fc235106e5f94c222dc0338a9",
@@ -51,18 +51,18 @@
         "12": "17d78400"
       },
       "monthlyRepaymentTable": {
-        "0": "989680",
-        "1": "989680",
-        "2": "989680",
-        "3": "989680",
-        "4": "989680",
-        "5": "989680",
-        "6": "989680",
-        "7": "989680",
-        "8": "989680",
-        "9": "989680",
+        "0": "68e7780",
+        "1": "5f5e100",
+        "2": "55d4a80",
+        "3": "4c4b400",
+        "4": "42c1d80",
+        "5": "3938700",
+        "6": "2faf080",
+        "7": "2625a00",
+        "8": "1c9c380",
+        "9": "1312d00",
         "10": "989680",
-        "11": "989680"
+        "11": "0"
       },
       "H_loanAmountToReceive_debtor": "2fa2f6fca04bed38a76e7696030d6b451cb6d775538a7cf1f16e83bf26236677",
       "PK_own_debtor": "49013ab6877a85835b8c04b83d8582e66d9921691f00569c7ad4ad4f1ee0e750",
@@ -134,7 +134,14 @@
         "8": "19ee3818f4a5196dd8e33767fbed85d1b89c8059021e2bb92ba45ce1ced601f7",
         "9": "1f37791efe708a0b3cb2cf15fd4015b6b952bc28fc81f94e3af624b692130ab1"
       },
-      "wt": "212bdd196333c892069de8654a83ac511b173b653c7b81661038aec33562e34c"
+      "wt": "212bdd196333c892069de8654a83ac511b173b653c7b81661038aec33562e34c",
+      "cnt": "1",
+      "old_CT_SKE_bondBalance": "",
+      "H_repayAmountToReceive_creditor": "",
+      "H_originalValue_debtor": "",
+      "nf_debtor": "",
+      "H_updateValue_debtor": "",
+      "": ""
     }
   ],
   "RealEstate_v": [
@@ -161,7 +168,7 @@
       "r_G": "20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16",
       "G": "26508f76b759063e3e20f28afcbc769215144e0235f33cfe8c638466ee421c92",
       "G_r": "28f32225a914076baac673d8791859e215b5a467a540b83a4d15621b7b28fbf1",
-      "H_monthlyRepaymentTable": "ed26e03ffd2e756678cbdd2ee32d683257365140a43a43e7850020e142fd3a2",
+      "H_monthlyRepaymentTable": "131bff4e3bbab3c38e7961682919cf9920fa6a49e8d03170f290018596dbd7c7",
       "r_debtorPKE": "38457e3d3b03ec18bcc5b240bd372497bb832de18b235f22c2f4340b0afe938",
       "r_CT_SKE_bondBalance": "448172f1e79b205c97d4e332d53ba0eb5c27a1a9612244d939a4d44e1156915",
       "r_CT_SKE_bondData": "3534002ed541aaea00743a8fe7b6dd1c19b0fc235106e5f94c222dc0338a9",
@@ -189,18 +196,18 @@
         "12": "17d78400"
       },
       "monthlyRepaymentTable": {
-        "0": "989680",
-        "1": "989680",
-        "2": "989680",
-        "3": "989680",
-        "4": "989680",
-        "5": "989680",
-        "6": "989680",
-        "7": "989680",
-        "8": "989680",
-        "9": "989680",
+        "0": "68e7780",
+        "1": "5f5e100",
+        "2": "55d4a80",
+        "3": "4c4b400",
+        "4": "42c1d80",
+        "5": "3938700",
+        "6": "2faf080",
+        "7": "2625a00",
+        "8": "1c9c380",
+        "9": "1312d00",
         "10": "989680",
-        "11": "989680"
+        "11": "0"
       },
       "H_loanAmountToReceive_debtor": "2fa2f6fca04bed38a76e7696030d6b451cb6d775538a7cf1f16e83bf26236677",
       "PK_own_debtor": "49013ab6877a85835b8c04b83d8582e66d9921691f00569c7ad4ad4f1ee0e750",
@@ -272,7 +279,8 @@
         "8": "19ee3818f4a5196dd8e33767fbed85d1b89c8059021e2bb92ba45ce1ced601f7",
         "9": "1f37791efe708a0b3cb2cf15fd4015b6b952bc28fc81f94e3af624b692130ab1"
       },
-      "wt": "212bdd196333c892069de8654a83ac511b173b653c7b81661038aec33562e34c"
+      "wt": "212bdd196333c892069de8654a83ac511b173b653c7b81661038aec33562e34c",
+      "cnt": "1"
     }
   ],
   "DID_v": [

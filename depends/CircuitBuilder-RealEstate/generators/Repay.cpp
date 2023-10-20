@@ -55,6 +55,7 @@ namespace CircuitBuilder
         {
 
             /* statements */
+            u_CT_SKE_bondBalance = createInputWire("u_CT_SKE_bondBalance");
             CT_SKE_bondBalance = createInputWire("CT_SKE_bondBalance"); //CT_bond_balance
             cnt = createInputWire("cnt");
             old_CT_SKE_bondBalance = createInputWire("old_CT_SKE_bondBalance"); //old_CT_bond_balance
@@ -82,6 +83,7 @@ namespace CircuitBuilder
             bondKey = createProverWitnessWire("bondKey"); //k_msg
             old_bondBalance = createProverWitnessWire("old_bondBalance"); //old_bond_balance
 
+            update_bondBalance = createProverWitnessWire("update_bondBalance");
             bondBalance = createProverWitnessWire("bondBalance"); //bond_balance
 
             r_H_repayAmountToReceive_creditor = createProverWitnessWire("r_H_repayAmountToReceive_creditor"); //r_C_v_creditor
@@ -109,10 +111,6 @@ namespace CircuitBuilder
             r_ENA_debtor = createProverWitnessWire("r_ENA_debtor");
             r_old_ENA_debtor = createProverWitnessWire("r_old_ENA_debtor");
             monthlyRepaymentTable = createProverWitnessWireArray(12, "monthlyRepaymentTable");   //table_balance
-
-
-
-
 
             vector<WirePtr> nextInputWires;
             HashGadget *hashGadget;
@@ -179,7 +177,7 @@ namespace CircuitBuilder
 
             //c_1 = k*pk_1^r  -> CT_creditorPKE_repayAmountToReceive = k_PKE_repayAmountToReceive_creditor * PK_enc_creditor^r_PKE_repayAmountToReceive_creditor
             ecGadget = allocate<ECGroupGeneratorGadget>(this, PK_enc_creditor, r_PKE_repayAmountToReceive_creditor);
-            addEqualityAssertion(ecGadget->getOutputWires()[0]->mul(k_PKE_repayAmountToReceive_creditor), CT_creditorPKE_repayAmountToReceive, "CT_creditorPKE_repayAmountToReceive not equal");
+            addEqualityAssertion((ecGadget->getOutputWires()[0])->mul(k_PKE_repayAmountToReceive_creditor), CT_creditorPKE_repayAmountToReceive, "CT_creditorPKE_repayAmountToReceive not equal");
   
             
             //CT_repayAmountToReceive_creditor = PKE.Enc(PK_enc_creditor, (pk_own_creditor,r_H_repayAmountToReceive_creditor, repayAmountToReceive_creditor))
@@ -190,7 +188,7 @@ namespace CircuitBuilder
             {
                 nextInputWires = {k_PKE_repayAmountToReceive_creditor->add(i), r_SKE_repayAmountToReceive_creditor};
                 hashGadget = allocate<HashGadget>(this,nextInputWires);
-                CT_creditorPKE_repayAmountToReceive_temp = datas_H_repayAmountToReceive_creditor->get(i)->add(hashGadget->getOutputWires()[0]);
+                CT_creditorPKE_repayAmountToReceive_temp = (datas_H_repayAmountToReceive_creditor->get(i))->add(hashGadget->getOutputWires()[0]);
                 addEqualityAssertion(CT_creditorPKE_repayAmountToReceive_temp, CT_repayAmountToReceive_creditor->get(i), "invalid CT_repayAmountToReceive_creditor");
             }
 
@@ -219,9 +217,8 @@ namespace CircuitBuilder
             // BigInteger cntBigInteger = ((ConstantWire*) cnt)->getConstant();
             // string cntString = cntBigInteger.toString();
            // stol(cntString)
-            addEqualityAssertion((monthlyRepaymentTable->get(2)), update_bondBalance,"bondBalance_update != table[cnt]");
-          
-
+            addEqualityAssertion(monthlyRepaymentTable->get(2), update_bondBalance,"bondBalance_update != table[cnt]");
+        
 
             return;
         }

@@ -164,12 +164,6 @@ namespace CircuitBuilder
             addOneAssertion(value_ENA_old_creditor->isEqualTo(zeroWire)->add(rt->isEqualTo(merkleTreeGadget->getOutputWires()[0]))->checkNonZero(),
                             "membership failed");
 
-
-
-
-
-
-
             // 여기 수정!! -> 쓸 수 있게 값들 ENC
             //c_0 = G^r    -> G_r_PKE_loanAmountToReceive_debtor = G_PKE_loanAmountToReceive_debtor^r_PKE_loanAmountToReceive_debtor
             ECGroupGeneratorGadget *ecGadget = allocate<ECGroupGeneratorGadget>(this, G_PKE_loanAmountToReceive_debtor, r_PKE_loanAmountToReceive_debtor);

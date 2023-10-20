@@ -61,16 +61,16 @@ namespace CircuitBuilder
             H_bondID = createInputWire("H_bondID");   // id_bond
 
             //PKE에서 필요함 
+            r_G = createInputWire("r_G");
             G_r = createInputWire("G_r");       // CT: c_0              c_0
             G = createInputWire("G");           // 이거 추가함
 
             H_monthlyRepaymentTable = createInputWire("H_monthlyRepaymentTable");         // CT_table
 
-
             /* witnesses */
             r_debtorPKE = createProverWitnessWire("r_debtorPKE");           // r
             r_CT_SKE_bondBalance = createProverWitnessWire("r_CT_SKE_bondBalance");   //CT_bond_balance에 대한 SKE때 필요한 random값  ,  CT_r_
-            r_CT_SEK_bondData = createProverWitnessWire("r_CT_SEK_bondData");     //CT_bondData에 대한 SKE때 필요한 random값      ,  CT_r
+            r_CT_SKE_bondData = createProverWitnessWire("r_CT_SKE_bondData");     //CT_bondData에 대한 SKE때 필요한 random값      ,  CT_r
             bondKey = createProverWitnessWire("bondKey");           // k
             ENA_debtor = createProverWitnessWire("ENA_debtor");     
             ENA_creditor = createProverWitnessWire("ENA_creditor");
@@ -82,70 +82,67 @@ namespace CircuitBuilder
             bondData = createProverWitnessWireArray(bondDataLength, "bondData"); // : 13   bond_data
             monthlyRepaymentTable = createProverWitnessWireArray(tableBalanceLength, "monthlyRepaymentTable");   //table_balance
 
-
             vector<WirePtr> nextInputWires;
             HashGadget *hashGadget;
 
             //H_bondID = H(ENA_creditor, ENA_debtor, index_bondID)
-            // nextInputWires = {ENA_debtor, ENA_creditor, index_bondID}; //concat
             nextInputWires = {ENA_debtor, ENA_creditor, index_bondID}; //concat
             hashGadget = allocate<HashGadget>(this, nextInputWires);
             addEqualityAssertion(hashGadget->getOutputWires()[0], H_bondID, "H_bondID not equal");
             
-            // //PKE 시작 -> PK_enc_debtor
-            // //c_0 = G^r    -> G_r = G^r
-            // ECGroupGeneratorGadget *ecGadget = allocate<ECGroupGeneratorGadget>(this, G, r_debtorPKE);
-            // addEqualityAssertion(ecGadget->getOutputWires()[0], G_r, "G_r not equal");
+            //PKE 시작 -> PK_enc_debtor
+            //c_0 = G^r    -> G_r = G^r
+            ECGroupGeneratorGadget *ecGadget = allocate<ECGroupGeneratorGadget>(this, G, r_G);
+            addEqualityAssertion(ecGadget->getOutputWires()[0], G_r, "G_r not equal");
             
-            // //c_1 = k*pk_1^r  -> CT_debtorPKE_bondKey = bondKey * PK_enc_debtor^r_debtorPKE
-            // ecGadget = allocate<ECGroupGeneratorGadget>(this, PK_enc_debtor, r_debtorPKE);
-            // addEqualityAssertion(ecGadget->getOutputWires()[0]->mul(bondKey), CT_debtorPKE_bondKey, "CT_debtorPKE_bondKey not equal");
+            //c_1 = k*pk_1^r  -> CT_debtorPKE_bondKey = bondKey * PK_enc_debtor^r_debtorPKE
+            ecGadget = allocate<ECGroupGeneratorGadget>(this, PK_enc_debtor, r_debtorPKE);
+            addEqualityAssertion(ecGadget->getOutputWires()[0]->mul(bondKey), CT_debtorPKE_bondKey, "CT_debtorPKE_bondKey not equal");
             
-            // //c_2 = k*pk_2^r  -> CT_creditorPKE_bondKey = bondKey * PK_enc_creditor^r_debtorPKE
-            // ecGadget = allocate<ECGroupGeneratorGadget>(this, PK_enc_creditor, r_debtorPKE);
-            // addEqualityAssertion(ecGadget->getOutputWires()[0]->mul(bondKey), CT_creditorPKE_bondKey, "CT_creditorPKE_bondKey not equal");
+            //c_2 = k*pk_2^r  -> CT_creditorPKE_bondKey = bondKey * PK_enc_creditor^r_debtorPKE
+            ecGadget = allocate<ECGroupGeneratorGadget>(this, PK_enc_creditor, r_debtorPKE);
+            addEqualityAssertion(ecGadget->getOutputWires()[0]->mul(bondKey), CT_creditorPKE_bondKey, "CT_creditorPKE_bondKey not equal");
 
-            // //c_3 = SKE.ENC_k(msg) -> CT_SKE_bondData = SKE.ENC_bondKey(bondData)
-            // //r 랜덤으로 뽑고, sct <- msg + PRF_k(r)  ... PRF = H(k||r)   ->   CT_SKE_bondData <- bondData + PRF_bondKey(r_CT_bondData)
-            // WirePtr CT_bondData_temp;
-            // for(int i = 0 ; i < 13 ; i++)
-            // {
-            //     nextInputWires = {bondKey, r_CT_SEK_bondData->add(i)};
-            //     hashGadget = allocate<HashGadget>(this,nextInputWires);
-            //     CT_bondData_temp = bondData->get(i)->add(hashGadget->getOutputWires()[0]);
-            //     addEqualityAssertion(CT_bondData_temp, CT_SKE_bondData->get(i), "invalid CT_SKE_bondData");
-            // }
+            //c_3 = SKE.ENC_k(msg) -> CT_SKE_bondData = SKE.ENC_bondKey(bondData)
+            //r 랜덤으로 뽑고, sct <- msg + PRF_k(r)  ... PRF = H(k||r)   ->   CT_SKE_bondData <- bondData + PRF_bondKey(r_CT_bondData)
+            WirePtr CT_bondData_temp;
+            for(int i = 0 ; i < 13 ; i++)
+            {
+                nextInputWires = {bondKey, r_CT_SKE_bondData->add(i)};
+                hashGadget = allocate<HashGadget>(this,nextInputWires);
+                CT_bondData_temp = bondData->get(i)->add(hashGadget->getOutputWires()[0]);
+                addEqualityAssertion(CT_bondData_temp, CT_SKE_bondData->get(i), "invalid CT_SKE_bondData");
+            }
 
-            // //c_3 = SKE.ENC_k(msg) -> CT_SKE_bondBalance = SKE.ENC_bondKey(bondBalance) 
-            // nextInputWires = {bondKey, r_CT_SKE_bondBalance};
-            // hashGadget = allocate<HashGadget>(this, nextInputWires);
-            // addEqualityAssertion(bondBalance->add(hashGadget->getOutputWires()[0]),CT_SKE_bondBalance, "invalid CT_SKE_bondBalance");
+            //c_3 = SKE.ENC_k(msg) -> CT_SKE_bondBalance = SKE.ENC_bondKey(bondBalance) 
+            nextInputWires = {bondKey, r_CT_SKE_bondBalance};
+            hashGadget = allocate<HashGadget>(this, nextInputWires);
+            addEqualityAssertion(bondBalance->add(hashGadget->getOutputWires()[0]),CT_SKE_bondBalance, "invalid CT_SKE_bondBalance");
 
+            //H_monthlyRepaymentTable = H(monthlyRepaymentTable) -> array...
+            for(int i = 0 ; i < tableBalanceLength ; i++){
+                nextInputWires.push_back(monthlyRepaymentTable->get(i));
+            }
 
-            // //H_monthlyRepaymentTable = H(monthlyRepaymentTable) -> array...
-            // for(int i = 0 ; i < tableBalanceLength ; i++){
-            //     nextInputWires.push_back(monthlyRepaymentTable->get(i));
-            // }
+            hashGadget = allocate<HashGadget>(this, nextInputWires);
+            addEqualityAssertion(hashGadget->getOutputWires()[0], H_monthlyRepaymentTable, "H_monthlyRepaymentTable != H(monthlyRepaymentTable)");
 
-            // hashGadget = allocate<HashGadget>(this, nextInputWires);
-            // addEqualityAssertion(hashGadget->getOutputWires()[0], H_monthlyRepaymentTable, "H_monthlyRepaymentTable != H(monthlyRepaymentTable)");
-
-            // //채권 안에 있는 대출 계약 내용 중에 양식에 맞춰 제대로 작성되었는지 체크하는 부분
-            // //////////////////////////////////////////// 숫자
-            // /*bond_data[13]= 
-            // 0 : 채무자ENA, 
-            // 1 : 채권자ENA, 
-            // 2 : 상품명(상품번호), 
-            // 3 : 대출신청금액, 
-            // 4 : 대출기간, 
-            // 5 : 거치기간, 
-            // 6 : 대출개시일, 
-            // 7 : 대출기간만료일, 
-            // 8 : 상환방법, 
-            // 9 : 주택담보대출비율, 
-            // 10: 대출금리, 
-            // 11: 총이자, 
-            // 12: 담보가치*/
+            // // //채권 안에 있는 대출 계약 내용 중에 양식에 맞춰 제대로 작성되었는지 체크하는 부분
+            // // //////////////////////////////////////////// 숫자
+            // // /*bond_data[13]= 
+            // // 0 : 채무자ENA, 
+            // // 1 : 채권자ENA, 
+            // // 2 : 상품명(상품번호), 
+            // // 3 : 대출신청금액, 
+            // // 4 : 대출기간, 
+            // // 5 : 거치기간, 
+            // // 6 : 대출개시일, 
+            // // 7 : 대출기간만료일, 
+            // // 8 : 상환방법, 
+            // // 9 : 주택담보대출비율, 
+            // // 10: 대출금리, 
+            // // 11: 총이자, 
+            // // 12: 담보가치*/
             
             // WirePtr loanPeriod= bondData->get(4);       //대출기간
 

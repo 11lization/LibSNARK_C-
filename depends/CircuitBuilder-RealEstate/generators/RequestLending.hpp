@@ -24,12 +24,12 @@ namespace RealEstate {
 		WiresPtr CT_SKE_bondData;
 
         WirePtr H_bondID; 
-        WirePtr G_r, G;
+        WirePtr r_G, G_r, G;
 
         WirePtr H_monthlyRepaymentTable;
 
 		/********************* Witness ***************************/
-    WirePtr r_debtorPKE,r_CT_SKE_bondBalance, r_CT_SEK_bondData;
+    WirePtr r_debtorPKE,r_CT_SKE_bondBalance, r_CT_SKE_bondData;
 		WirePtr bondKey, ENA_debtor, ENA_creditor, index_bondID, bondBalance, PK_enc_debtor, PK_enc_creditor;
         
 		WiresPtr bondData;

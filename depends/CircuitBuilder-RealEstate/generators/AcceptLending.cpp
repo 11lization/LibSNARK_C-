@@ -62,8 +62,6 @@ namespace CircuitBuilder
             CT_creditorPKE_bondKey = createInputWire("CT_creditorPKE_bondKey"); //채권자의 pk로 Enc     CT_creditorKey
             H_monthlyRepaymentTable = createInputWire("H_monthlyRepaymentTable");         // CT_table
 
-            CT_creditorPKE_bondKey = createInputWire("CT_creditorPKE_bondKey"); //채권자의 pk로 Enc     CT_creditorKey
-
             H_loanAmountToReceive_debtor = createInputWire("H_loanAmountToReceiev_debtor");         // C_v_debtor
             PK_own_debtor = createInputWire("PK_own_debtor"); 
             
@@ -78,6 +76,7 @@ namespace CircuitBuilder
             H_updateValue_creditor = createInputWire("H_updateValue_creditor");
 
             rt = createInputWire("rt");
+            wt = createInputWire("wt");
 
             /*witnesses */
             //k_msg = createProverWitnessWire("k_msg");
@@ -87,7 +86,7 @@ namespace CircuitBuilder
             PK_enc_debtor = createProverWitnessWire("PK_enc_debtor");
 
             ENA_debtor = createProverWitnessWire("ENA_debtor");
-            ENA_creditor = createProverWitnessWire("ENA_creditor");
+            ENA_new_creditor = createProverWitnessWire("ENA__new_creditor");
             ENA_old_creditor = createProverWitnessWire("ENA_old_creditor"); //old_ENA_creditor
 
             value_ENA_old_creditor = createProverWitnessWire("value_ENA_old_creditor");//, 이전 ENA 잔고  value_old_creditor
@@ -125,8 +124,12 @@ namespace CircuitBuilder
             r_H_originalValue_creditor = createProverWitnessWire("r_H_originalValue_creditor");
             r_H_updateValue_creditor = createProverWitnessWire("r_H_updateValue_creditor");
 
+            direction = createProverWitnessWire("direction");                               // Path(cm)
+            intermediateHashes = createProverWitnessWireArray(treeHeight, "intermediateHashes");
+
             vector<WirePtr> nextInputWires;
             HashGadget *hashGadget;
+            
 
 
             //bondBalance = v'(loanAmountToReceive_debtor) : 채무자한테 줄 돈 dv_->v_priv_out
@@ -159,10 +162,16 @@ namespace CircuitBuilder
 
 
             // membership check
-            Wires leafWires = {H_originalValue_creditor};
-            MerkleTreePathGadget *merkleTreeGadget = allocate<MerkleTreePathGadget>(this, directionSelector, leafWires, *intermediateHashWires, treeHeight, true);
+            Wires leafWires = {wt};
+            MerkleTreePathGadget *merkleTreeGadget = allocate<MerkleTreePathGadget>(this, direction, leafWires, *intermediateHashes, treeHeight, true);
             addOneAssertion(value_ENA_old_creditor->isEqualTo(zeroWire)->add(rt->isEqualTo(merkleTreeGadget->getOutputWires()[0]))->checkNonZero(),
                             "membership failed");
+
+
+
+
+
+
 
             // 여기 수정!! -> 쓸 수 있게 값들 ENC
             //c_0 = G^r    -> G_r_PKE_loanAmountToReceive_debtor = G_PKE_loanAmountToReceive_debtor^r_PKE_loanAmountToReceive_debtor
@@ -193,7 +202,7 @@ namespace CircuitBuilder
             //ENA_creditor = SKE.Enc(k_ENA_creditor, value_ENA_new_creditor) -> 현재 남아있는(update된) 채권자 ENA 잔금 
             nextInputWires = {k_ENA_creditor, r_ENA_creditor};
             hashGadget = allocate<HashGadget>(this, nextInputWires);
-            addEqualityAssertion(value_ENA_new_creditor->add(hashGadget->getOutputWires()[0]),ENA_creditor, "invalid ENA_creditor");
+            addEqualityAssertion(value_ENA_new_creditor->add(hashGadget->getOutputWires()[0]),ENA_new_creditor, "invalid ENA_new_creditor");
 
             //old_ENA_creditor = SKE.Enc(k_ENA_creditor, value_ENA_old_creditor) -> 이전 채권자 ENA 잔금
             nextInputWires = {k_ENA_creditor, r_old_ENA_creditor};

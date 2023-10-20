@@ -32,11 +32,11 @@ namespace RealEstate {
 		//추가
 		WirePtr G_r_PKE_loanAmountToReceive_debtor, CT_debtorPKE_loanAmountToReceive;
 		WirePtr pk_own_creditor, H_originalValue_creditor, nf_creditor;
-		WirePtr H_updateValue_creditor, rt;
+		WirePtr H_updateValue_creditor, rt, wt;
 
 		/********************* Witness ***************************/
         WirePtr bondBalance, index_bondID, PK_enc_creditor, PK_enc_debtor;
-		WirePtr ENA_debtor, ENA_creditor, ENA_old_creditor; // , 업데이트된 sct, 이전 sct
+		WirePtr ENA_debtor, ENA_new_creditor, ENA_old_creditor; // , 업데이트된 sct, 이전 sct
 		WirePtr value_ENA_old_creditor, loanAmountToReceive_debtor, value_ENA_new_creditor;//이전 ENA 잔고, 보내야할 돈, 돈 보낸후 ENA잔고
 		WiresPtr bondData;
 		
@@ -58,8 +58,8 @@ namespace RealEstate {
 		WirePtr r_H_originalValue_creditor, sk_own_creditor, r_H_updateValue_creditor;
 		
 		/********************* MerkleTree ***************************/
-		WirePtr directionSelector;
-		WiresPtr intermediateHashWires;
+		WirePtr direction;
+		WiresPtr intermediateHashes;
 		static const int CTLength = 3;
 		static const int ctLength = 2;
 		static const int pkLength = 3;

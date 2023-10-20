@@ -1,0 +1,1011 @@
+❯ cd test
+❯ e8aaf3c71d35bc3e13950a484637757fe32dbb841654c2e1899dcf00a328f58
+❯ make
+make BUILD_TYPE=debug all 
+
+Target : darwin
+Installation directories :
+        Openssl  : /opt/homebrew/Cellar/openssl@3/3.0.8
+        GMP      : /opt/homebrew/Cellar/gmp/6.2.1_1
+        OMP      : /opt/homebrew/Cellar/libomp/15.0.7
+        OPENJDK  : /opt/homebrew/Cellar/openjdk@11/11.0.18
+
+
+source /Users/mangoo/Documents/LibSNARK_C-/test/../build_workspace/test/../darwin_path.info ; \
+        clang++ -Wall -Wextra -Wfatal-errors -stdlib=libc++ -std=c++11  -O2 -g  \
+        test.cpp  \
+        -I../ -I../depends/CircuitBuilder  -I../depends/json_tree -I${GMP}/include -I${OpenSSL}/include -I${OMP}/include -I${OpenJDK}/include \
+        -flto -fPIC  \
+        ../lib/darwin_debug/lib/libSnark.a  \
+        -L${OpenSSL}/lib -L${GMP}/lib -L${OMP}/lib \
+        -lgmp -lgmpxx -lssl -lcrypto  -lc++ -lomp -ldl -lpthread \
+        -o /Users/mangoo/Documents/LibSNARK_C-/test/../build_workspace/test/test.debug
+ld: warning: dylib (/opt/homebrew/Cellar/libomp/15.0.7/lib/libomp.dylib) was built for newer macOS version (13.0) than being linked (12.3)
+
+/Users/mangoo/Documents/LibSNARK_C-/test/../build_workspace/test/test.debug RealEstate 32
+
+
+ Embedded Circuits :
+    DID
+    NFID
+    RealEstate
+    Register
+    Tally
+    Vote
+    ZKlay
+    zkzkRollup
+
+  <<<< 1 , success : using embedded [RealEstate] circuit generator >>>> 
+
+
+
+BuildCircuit  :
+Context_ID    : 1
+Circuit Name  : RealEstate
+Circuit Args  : 
+    hashType : MiMC7 
+    treeHeight : 32 
+Running Circuit Generator for < RealEstate >
+
+Embedded Circuit [RealEstate] Generation Done 
+    Constraints     : 13188 
+    Input Wires     : 18 
+    Output Wires    : 0 
+    Witness Wires   : 1063 
+    List of primary inputs to assign : 
+                - CT_SKE_bondBalance 
+                - CT_creditorPKE_repayAmountToReceive 
+                - ENA_creditor 
+                - ENA_new_debtor 
+                - G_PKE_repayAmountToReceive_creditor 
+                - G_r_PKE_repayAmountToReceive_creditor 
+                - H_monthlyRepaymentTable 
+                - H_originalValue_debtor 
+                - H_repayAmountToReceive_creditor 
+                - H_updateValue_debtor 
+                - PK_enc_creditor 
+                - PK_own_creditor 
+                - bondBalance 
+                - bondKey 
+                - cnt 
+                - k_ENA_debtor 
+                - k_PKE_repayAmountToReceive_creditor 
+                - nf_debtor 
+                - old_CT_SKE_bondBalance 
+                - old_ENA_debtor 
+                - old_bondBalance 
+                - pk_own_debtor 
+                - r_CT_SKE_bondBalance 
+                - r_ENA_debtor 
+                - r_H_originalValue_debtor 
+                - r_H_repayAmountToReceive_creditor 
+                - r_H_updateValue_debtor 
+                - r_PKE_repayAmountToReceive_creditor 
+                - r_SKE_repayAmountToReceive_creditor 
+                - r_old_ENA_debtor 
+                - repayAmountToReceive_creditor 
+                - rt 
+                - sk_own_debtor 
+                - u_CT_SKE_bondBalance 
+                - update_bondBalance 
+                - value_ENA_new_debtor 
+                - value_ENA_old_debtor 
+                - wt 
+                - CT_repayAmountToReceive_creditor , 3 
+                - datas_H_repayAmountToReceive_creditor , 3 
+                - monthlyRepaymentTable , 12 
+        ----------------------------------
+Deallocate 4152 Operators , 4152 Wires 
+create circuit reader 
+numInputs:18 , numOutputs:0 , numNizkInputs:1063 
+Translating Constraints 
+Translating Constraints : Done 
+get constraint system 
+Evaluate Inputs Done : Full Assignments:14250 ,  Primary Inputs:18 , Auxiliary Inputs:14232 
+BuildCircuit  : Done
+
+
+Build Circuit Profiling Info : 
+
+(enter) Build Circuit                           [             ] (0.0000s x0.94 from start)
+  (enter) Create Embedded Circuit               [             ] (0.0000s x1.01 from start)
+  (leave) Create Embedded Circuit               [0.0443s x1.00] (0.0444s x1.00 from start)
+  (enter) Circuit Reader                        [             ] (0.0447s x1.00 from start)
+    (enter) Construct Circuit                   [             ] (0.0453s x1.00 from start)
+    (leave) Construct Circuit                   [1.2602s x1.00] (1.3055s x1.00 from start)
+  (leave) Circuit Reader                        [1.2914s x1.00] (1.3361s x1.00 from start)
+  (enter) Get ConstraintSystem from Gadgetlib2  [             ] (1.3362s x1.00 from start)
+  (leave) Get ConstraintSystem from Gadgetlib2  [0.2036s x1.00] (1.5398s x1.00 from start)
+(leave) Build Circuit                           [1.5398s x1.00] (1.5398s x1.00 from start)
+
+
+Run Setup     : 
+Context_ID    : 1
+Call to R1CS GG-ppzkSNARK Generator
+* G1 elements in PK: 59120
+* Non-zero G1 elements in PK: 54784
+* G2 elements in PK: 14253
+* Non-zero G2 elements in PK: 9918
+* PK size in bits: 19652870
+* G1 elements in VK: 19
+* G2 elements in VK: 2
+* VK size in bits: 7270
+End Call to R1CS GG-ppzkSNARK Generator
+* G1 elements in PK: 59120
+* Non-zero G1 elements in PK: 54784
+* G2 elements in PK: 14253
+* Non-zero G2 elements in PK: 9918
+* PK size in bits: 19652870
+* G1 elements in VK: 19
+* G2 elements in VK: 2
+* VK size in bits: 7270
+Run Setup     : Done
+
+
+Run Setup Profiling Info : 
+
+(enter) Setup                                   [             ] (0.0000s x1.01 from start)
+  (enter) Call to r1cs_gg_ppzksnark_generator   [             ] (0.0001s x1.01 from start)
+    (enter) Call to r1cs_gg_ppzksnark_generator_from_secrets    [             ] (0.0002s x1.00 from start)
+      (enter) Call to r1cs_constraint_system::swap_AB_if_beneficial     [             ] (0.0076s x1.00 from start)
+        (enter) Estimate densities                      [             ] (0.0076s x1.00 from start)
+          * Non-zero A-count (estimate): 9918
+          * Non-zero B-count (estimate): 11420
+        (leave) Estimate densities                      [0.0022s x1.00] (0.0098s x1.00 from start)
+        (enter) Perform the swap                        [             ] (0.0098s x1.00 from start)
+        (leave) Perform the swap                        [0.0000s x1.00] (0.0098s x1.00 from start)
+      (leave) Call to r1cs_constraint_system::swap_AB_if_beneficial     [0.0022s x1.00] (0.0098s x1.00 from start)
+      * QAP number of variables: 14250
+      * QAP pre degree: 13188
+      * QAP degree: 16384
+      * QAP number of input variables: 18
+      (enter) Compute query densities                   [             ] (0.0788s x1.00 from start)
+      (leave) Compute query densities                   [0.0001s x1.00] (0.0789s x1.00 from start)
+      (enter) Compute ABC for R1CS verification key     [             ] (0.0789s x1.00 from start)
+      (leave) Compute ABC for R1CS verification key     [0.0000s x1.01] (0.0789s x1.00 from start)
+      (enter) Compute L query for R1CS proving key      [             ] (0.0789s x1.00 from start)
+      (leave) Compute L query for R1CS proving key      [0.0020s x1.00] (0.0810s x1.00 from start)
+      (enter) Generating G1 MSM window table            [             ] (0.0813s x1.00 from start)
+        * G1 window: 11
+      (leave) Generating G1 MSM window table            [0.0378s x1.00] (0.1191s x1.00 from start)
+      (enter) Generating G2 MSM window table            [             ] (0.1191s x1.00 from start)
+        * G2 window: 11
+      (leave) Generating G2 MSM window table            [0.1765s x1.00] (0.2956s x1.00 from start)
+      (enter) Generate R1CS proving key                 [             ] (0.2956s x1.00 from start)
+        (enter) Generate queries                        [             ] (0.2979s x1.00 from start)
+          (enter) Compute the A-query                   [             ] (0.2979s x1.00 from start)
+          (leave) Compute the A-query                   [0.0297s x7.31] (0.3276s x1.57 from start)
+          (enter) Compute the B-query                   [             ] (0.3277s x1.57 from start)
+          (leave) Compute the B-query                   [0.1315s x8.40] (0.4591s x3.53 from start)
+          (enter) Compute the H-query                   [             ] (0.4591s x3.53 from start)
+          (leave) Compute the H-query                   [0.0457s x6.71] (0.5049s x3.81 from start)
+          (enter) Compute the L-query                   [             ] (0.5049s x3.81 from start)
+          (leave) Compute the L-query                   [0.0326s x8.20] (0.5375s x4.08 from start)
+        (leave) Generate queries                        [0.2396s x7.91] (0.5375s x4.08 from start)
+      (leave) Generate R1CS proving key                 [0.2419s x7.85] (0.5375s x4.08 from start)
+      (enter) Generate R1CS verification key            [             ] (0.5375s x4.08 from start)
+        (enter) Encode ABC for R1CS verification key    [             ] (0.5375s x4.08 from start)
+        (leave) Encode ABC for R1CS verification key    [0.0003s x1.95] (0.5379s x4.08 from start)
+      (leave) Generate R1CS verification key            [0.0003s x1.92] (0.5379s x4.08 from start)
+    (leave) Call to r1cs_gg_ppzksnark_generator_from_secrets    [0.5377s x4.08] (0.5379s x4.08 from start)
+  (leave) Call to r1cs_gg_ppzksnark_generator   [0.5444s x4.04] (0.5445s x4.04 from start)
+(leave) Setup                                   [0.5445s x4.04] (0.5445s x4.04 from start)
+Write Constraint System to File
+  File : [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_constraint_system.dat]
+---- File Info ----
+{
+   "Auxiliary Input Size"         : 14232 , 
+   "Binary Format"                : "MACOS_APPLE_SILICON" , 
+   "Checksum"                     : "179bb49d8bec1a54416461ff9387cb700f09ac5d343394c62b4bc346976264b5" , 
+   "Compressed"                   : true , 
+   "File Size"                    : 16669573 , 
+   "Full Assignments Size"        : 14250 , 
+   "Num of Constraints"           : 13188 , 
+   "Primary Input Size"           : 18 , 
+   "Uncompressed Size"            : 32327499 , 
+   "Zero VariableIdx Map Size"    : 0 , 
+   "wire2variable Index Map Size" : 14250
+}
+-------------------
+End of Writing Constraint System to file
+Write Proof Key to file
+  File : [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_crs_pk.dat]
+End of Writing Proof Key to file
+Write Verify Key to file
+  File : [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_crs_vk.dat]
+End of Writing Verify Key to file
+<<<<  Verify Key Json  >>>>
+{
+   "ABC"         : [
+      [
+         "0x1315F04D94A6C38AA5F0A60F55F9D2E77847F53F92FEE718306DE3686C3A5C07" , 
+         "0x249C6BC64774F3574AD8154F5E89A8F26A42333BC55232A435B53048E93D23E2"
+      ] , 
+      [
+         "0x22FFA078F193374235213E98DB01456D98CA9A16C778261651789A8A10B92454" , 
+         "0x0BEAF1CA621285A43D11639B8A1E210EE05003913BF5C034AFA9D28BB43C09E0"
+      ] , 
+      [
+         "0x044D5E1DB9A0A448DE5AEF0F713ACA1D526C93FEA49324544AB5D41869F0E90F" , 
+         "0x1604BD7BAEB66FA84B45DB1D95AA04563DBBDAE5D6F4C42D26EF15BD5A471082"
+      ] , 
+      [
+         "0x0BC79B0570A6533A6DFF15377E896F6AC02745ABC9B03E6A42E4C96E440434CB" , 
+         "0x2B00E2448D307B0C4A82F0948AA844B51D2E547B4CBA38696C883D5C110BAAB5"
+      ] , 
+      [
+         "0x0E283FFC2660C211DEA5CEFC86DCBF254B18D41ECAD15066CBEC066DE471B5BA" , 
+         "0x0040A0BBC410B5A914622A26FB5B7328330BBE6551712B41A9811F4797505317"
+      ] , 
+      [
+         "0x209234859E8405DB5BD3C65BDE12C6CA205CC567FABCB745E1DBC762C5E6C45D" , 
+         "0x2D8E6617B5CB4FF9C61BA1B584E5FCD6D3356B626948D19F2A8540266730540D"
+      ] , 
+      [
+         "0x1E60360BA8ED7FBCD7094EAD709C7BBB88A293DD53D1967119F53078457966C4" , 
+         "0x060B4264CE5AF6C804348B865FA8A3503DC9B09363423720D86AB1204D1323FC"
+      ] , 
+      [
+         "0x2D74D45585367ABD098122BA1CD83E8CBC608F9D978D278202C17BD6FA67BF4C" , 
+         "0x11B1CAB66AD22E668121E016DBFE559F6D33CC09EDF62983566E4769C5139E1B"
+      ] , 
+      [
+         "0x03613B878AC7E7A446837A9CD6499A77226472292A986DAE2141F49BF01A337E" , 
+         "0x2FEF644A38231FBAB61BF358DAD4CD99303205156CDA98E32330792D9F645D85"
+      ] , 
+      [
+         "0x1FFD8C7A04D6E4157C9BECF2F4436BF3D4B799E96A100C450A7826445B9DA6A4" , 
+         "0x18492A77B59066A7C827F53BD979A74E47D349C7E198C312B58858085C1F78D4"
+      ] , 
+      [
+         "0x26F12B0BC8E71B6029C2D1257B10ABD842933A2CFBA9D37BCAF3DB06BD925D90" , 
+         "0x063F7F818467172C8288E6647EBCAA8A2188B1C6415C87D8BC77F009E8DAA61E"
+      ] , 
+      [
+         "0x13FA94BF2B5A2B1585B9AB8213B2BF52B0BBE81C90A3BD58449316AB8C8A075F" , 
+         "0x226A94B1B776CAC4649E2D8460E53A356C959C4BFB3A5AFD5B073301B18B2370"
+      ] , 
+      [
+         "0x087CA073333F7256E3F409B9301ED71DCE7687705E18DD1866870BE91D64777F" , 
+         "0x2C9CAFEA0E207354177025F61BCF5F911D38CFA95EDBCEB28A18CB02ECE6C1B0"
+      ] , 
+      [
+         "0x0E9BF4BA11A3007644DC73E38988EBCFACF5A958D46765990CFF5A10F6B03AB7" , 
+         "0x1FC92506B3B9F3AD1455955AFCCC3B01049452F74D0CD9A5BB061558BBA2A986"
+      ] , 
+      [
+         "0x0F98A3C107CB1C7BDADCAE3FCDC01121BA9C75C5E90849FC5B51340AFC69BAE7" , 
+         "0x302D08C005981D15881906D65D7D09AD2245C4018D8E801797DA03570A6C66EE"
+      ] , 
+      [
+         "0x24434A532FB4822ECAE1E28DDA56C8858BBFFEFDAEDA4BF1E104D132CDA15239" , 
+         "0x1B92CC67B865AD4D9D07121E5E4F781AA2EE773DBCC8BF5AA799E7C954ECAFDE"
+      ] , 
+      [
+         "0x04DF4093F27B87F65E327488A0D338F95E5F5968864A0D0D699C11E160F0836A" , 
+         "0x03E4848025F7FC01EF5647807058A2B6DD97C8AE31110BA47BB290896614534C"
+      ] , 
+      [
+         "0x0F7B80F4E95644B5D04C15ABA30FA962E276039A970A286ED2A3FC2F5E668517" , 
+         "0x0D9700D05CBD7F24FBA8BCD8319BDBF38A816815EEC781A0A504C683BB38E839"
+      ] , 
+      [
+         "0x1B8CBFD7EC845ACC624ABADDBB7C1E0EA2D4537563BB4D220803B18257A6F1C6" , 
+         "0x271D8E65BBF13C53C028F19F20703E3242AE6A11E98F91724E073893A6C386EC"
+      ]
+   ] , 
+   "Domain Size" : 18 , 
+   "Indices"     : [
+      0 , 
+      1 , 
+      2 , 
+      3 , 
+      4 , 
+      5 , 
+      6 , 
+      7 , 
+      8 , 
+      9 , 
+      10 , 
+      11 , 
+      12 , 
+      13 , 
+      14 , 
+      15 , 
+      16 , 
+      17
+   ] , 
+   "alpha"       : [
+      "0x1EA25EA9DA77F4C1E27B719471F18B1F55C0F370D9ACD93DF9160E526323447F" , 
+      "0x1437FCF75D676C88D9DFEE2EFBF0EFB803FD23327D248A3A9156519040978512"
+   ] , 
+   "beta"        : [
+      [
+         "0x23385779F84BBB0DFEB041F60A9BF8064EDD5D10CF189783769335C87A2C6942" , 
+         "0x08C2DA7F00D68D331E62560C89928655EE0896CDE40F6C423A42EDCC90546CFD"
+      ] , 
+      [
+         "0x18D197AACEFAB25EB4D4FE7050F1CB23D0FC57459A9550B2819BC02A4CF2CCB8" , 
+         "0x0132FF1E47D0CCA3315F022736360A7D37677CB6FCB794A19951A439993F96C8"
+      ]
+   ] , 
+   "delta"       : [
+      [
+         "0x1D57979932C96D8892874C418948A3FEC35C109EC657E4BD0FC0A558C52F0F14" , 
+         "0x231B660086FED68ED1BA429BF5DA64C5687A2C7CE70379CBDFA7F42345FD4E81"
+      ] , 
+      [
+         "0x040B6EB61A452ADEB2BAC6C1D42CDF8E831D0828B6784C4E011596563E241C27" , 
+         "0x110BB21336E6267D38D14DD8AE34C782C05080262072F26419615434394188A7"
+      ]
+   ]
+}
+<<<<              >>>>
+finalize_circuit arguments :
+context_id                 : 1
+Deallocate 32674 Operators , 34244 Wires 
+
+  <<<< 2 , success : using embedded [RealEstate] circuit generator with cs file [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_constraint_system.dat] >>>> 
+
+Verify Constraint System File Checksum
+  File : [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_constraint_system.dat]
+  ---- File Info ----
+{
+   "Auxiliary Input Size"         : 14232 , 
+   "Binary Format"                : "MACOS_APPLE_SILICON" , 
+   "Checksum"                     : "179bb49d8bec1a54416461ff9387cb700f09ac5d343394c62b4bc346976264b5" , 
+   "Compressed"                   : true , 
+   "File Size"                    : 16669573 , 
+   "Full Assignments Size"        : 14250 , 
+   "Num of Constraints"           : 13188 , 
+   "Primary Input Size"           : 18 , 
+   "Uncompressed Size"            : 32327499 , 
+   "Zero VariableIdx Map Size"    : 0 , 
+   "wire2variable Index Map Size" : 14250
+}
+-------------------
+End of Verify Constraint System File Checksum : Success 
+  <<<< 0 , Success , valid checksum [179bb49d8bec1a54416461ff9387cb700f09ac5d343394c62b4bc346976264b5] >>>> 
+
+finalize_circuit arguments :
+context_id                 : 2
+
+  <<<< 3 , success : using embedded [RealEstate] circuit generator >>>> 
+
+
+
+BuildCircuit  :
+Context_ID    : 3
+Circuit Name  : RealEstate
+Circuit Args  : 
+    hashType : MiMC7 
+    treeHeight : 32 
+Running Circuit Generator for < RealEstate >
+
+Embedded Circuit [RealEstate] Generation Done 
+    Constraints     : 13188 
+    Input Wires     : 18 
+    Output Wires    : 0 
+    Witness Wires   : 1063 
+    List of primary inputs to assign : 
+                - CT_SKE_bondBalance 
+                - CT_creditorPKE_repayAmountToReceive 
+                - ENA_creditor 
+                - ENA_new_debtor 
+                - G_PKE_repayAmountToReceive_creditor 
+                - G_r_PKE_repayAmountToReceive_creditor 
+                - H_monthlyRepaymentTable 
+                - H_originalValue_debtor 
+                - H_repayAmountToReceive_creditor 
+                - H_updateValue_debtor 
+                - PK_enc_creditor 
+                - PK_own_creditor 
+                - bondBalance 
+                - bondKey 
+                - cnt 
+                - k_ENA_debtor 
+                - k_PKE_repayAmountToReceive_creditor 
+                - nf_debtor 
+                - old_CT_SKE_bondBalance 
+                - old_ENA_debtor 
+                - old_bondBalance 
+                - pk_own_debtor 
+                - r_CT_SKE_bondBalance 
+                - r_ENA_debtor 
+                - r_H_originalValue_debtor 
+                - r_H_repayAmountToReceive_creditor 
+                - r_H_updateValue_debtor 
+                - r_PKE_repayAmountToReceive_creditor 
+                - r_SKE_repayAmountToReceive_creditor 
+                - r_old_ENA_debtor 
+                - repayAmountToReceive_creditor 
+                - rt 
+                - sk_own_debtor 
+                - u_CT_SKE_bondBalance 
+                - update_bondBalance 
+                - value_ENA_new_debtor 
+                - value_ENA_old_debtor 
+                - wt 
+                - CT_repayAmountToReceive_creditor , 3 
+                - datas_H_repayAmountToReceive_creditor , 3 
+                - monthlyRepaymentTable , 12 
+        ----------------------------------
+Deallocate 4152 Operators , 4152 Wires 
+create circuit reader 
+numInputs:18 , numOutputs:0 , numNizkInputs:1063 
+Translating Constraints 
+Translating Constraints : Done 
+get constraint system 
+Evaluate Inputs Done : Full Assignments:14250 ,  Primary Inputs:18 , Auxiliary Inputs:14232 
+BuildCircuit  : Done
+
+
+Build Circuit Profiling Info : 
+
+(enter) Build Circuit                           [             ] (0.0000s x1.02 from start)
+  (enter) Create Embedded Circuit               [             ] (0.0000s x0.96 from start)
+  (leave) Create Embedded Circuit               [0.0318s x1.00] (0.0318s x1.00 from start)
+  (enter) Circuit Reader                        [             ] (0.0319s x1.00 from start)
+    (enter) Construct Circuit                   [             ] (0.0325s x1.00 from start)
+    (leave) Construct Circuit                   [1.2560s x1.00] (1.2885s x1.00 from start)
+  (leave) Circuit Reader                        [1.2876s x1.00] (1.3194s x1.00 from start)
+  (enter) Get ConstraintSystem from Gadgetlib2  [             ] (1.3194s x1.00 from start)
+  (leave) Get ConstraintSystem from Gadgetlib2  [0.2044s x1.00] (1.5239s x1.00 from start)
+(leave) Build Circuit                           [1.5239s x1.00] (1.5239s x1.00 from start)
+Read Proof Key from file
+  File : [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_crs_pk.dat]
+  
+* G1 elements in PK: 59120
+* Non-zero G1 elements in PK: 54784
+* G2 elements in PK: 14253
+* Non-zero G2 elements in PK: 9918
+* PK size in bits: 19652870
+End of Reading Proof Key from file
+
+Update primary inputs from json : 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_creditorPKE_bondKey] **
+** Error : Unknown primary input name [CT_debtorPKE_bondKey] **
+** Error : Unknown primary input name [CT_debtorPKE_loanAmountToReceive] **
+** Error : Unknown primary input name [CT_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [CT_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [CT_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [ENA_debtor] **
+** Error : Unknown primary input name [ENA_new_creditor] **
+** Error : Unknown primary input name [ENA_old_creditor] **
+** Error : Unknown primary input name [G] **
+** Error : Unknown primary input name [G_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [G_r] **
+** Error : Unknown primary input name [G_r_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [H_bondID] **
+** Error : Unknown primary input name [H_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [H_originalValue_creditor] **
+** Error : Unknown primary input name [H_updateValue_creditor] **
+** Error : Unknown primary input name [PK_enc_debtor] **
+** Error : Unknown primary input name [PK_own_debtor] **
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [datas_H_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [datas_H_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [datas_H_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [direction] **
+** Error : Unknown primary input name [index_bondID] **
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [k_ENA_creditor] **
+** Error : Unknown primary input name [k_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [nf_creditor] **
+** Error : Unknown primary input name [pk_own_creditor] **
+** Error : Unknown primary input name [r_CT_SKE_bondData] **
+** Error : Unknown primary input name [r_ENA_creditor] **
+** Error : Unknown primary input name [r_G] **
+** Error : Unknown primary input name [r_H_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [r_H_originalValue_creditor] **
+** Error : Unknown primary input name [r_H_updateValue_creditor] **
+** Error : Unknown primary input name [r_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [r_SKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [r_debtorPKE] **
+** Error : Unknown primary input name [r_old_ENA_creditor] **
+** Error : Unknown primary input name [sk_own_creditor] **
+** Error : Unknown primary input name [value_ENA_new_creditor] **
+** Error : Unknown primary input name [value_ENA_old_creditor] **
+
+
+Run Proof     :
+Context_ID    : 3
+Evaluating Inputs
+Assign Primary Input [CT_SKE_bondBalance]=13ff3056e691af93d1242b2eb7e8f0ede9026034a15e18711bda50676a69d41c
+Assign Primary Input [CT_creditorPKE_repayAmountToReceive]=38cf4f19d8289260e07147c39478c48953033dd867534dbda8d7871b49a774e
+Assign Primary Input [ENA_creditor]=5c14950534b40fd5c02c9e24f6b412117254f4633066972c2dbcc8342cfa7ade
+Assign Primary Input [ENA_new_debtor]=16ec918a34bf310e766fc6acfc858110c00c26429d27852be56f293ec2e8b851
+Assign Primary Input [G_PKE_repayAmountToReceive_creditor]=26508f76b759063e3e20f28afcbc769215144e0235f33cfe8c638466ee421c92
+Assign Primary Input [G_r_PKE_repayAmountToReceive_creditor]=28f32225a914076baac673d8791859e215b5a467a540b83a4d15621b7b28fbf1
+Assign Primary Input [H_monthlyRepaymentTable]=10d0907659ea49c4582eedc2305f46b824af401224beb4e9a58eabeed9b18b96
+Assign Primary Input [H_originalValue_debtor]=28355c24b77fbd8b09fb0dd8b8e6e02fdf920993f1bc9a0c64834841a2f071bc
+Assign Primary Input [H_repayAmountToReceive_creditor]=19cd7d82cc950af4fc2bee20897dc610b1b9291fe021a0cdce42ac049055d228
+Assign Primary Input [H_updateValue_debtor]=98d5fa663970cca9f7aeb099d80eede86b37e5f539238fa35b590f72b9a148f
+Assign Primary Input [PK_enc_creditor]=11309f2840bff3f891f1c15651994532f095d6ce68d1771a1ba3e3baca3ede70
+Assign Primary Input [PK_own_creditor]=0
+Assign Primary Input [bondBalance]=7270e00
+Assign Primary Input [bondKey]=37f311b6480079c76dcb85eade8885ef329fe6411a7f8926a73ff40cbbf1b986
+Assign Primary Input [cnt]=1
+Assign Primary Input [k_ENA_debtor]=1201a6dd7c5a1743a172d2648792f2cba39d1d82102d3543fe7b81042edcaf66
+Assign Primary Input [k_PKE_repayAmountToReceive_creditor]=448172f1e79b205c97d4e332d53ba0eb5c27a1a9612244d939a4d44e1156915
+Assign Primary Input [nf_debtor]=e8aaf3c71d35bc3e13950a484637757fe32dbb841654c2e1899dcf00a328f58
+Assign Primary Input [old_CT_SKE_bondBalance]=13ff3056e691af93d1242b2eb7e8f0ede9026034a15e18711bda50676938a71c
+Assign Primary Input [old_ENA_debtor]=e59b1365a0b5981ce658f29c70e8217450e91e34932f53fa0f902b47ba289c2
+Assign Primary Input [old_bondBalance]=5f5e100
+Assign Primary Input [pk_own_debtor]=0
+Assign Primary Input [r_CT_SKE_bondBalance]=448172f1e79b205c97d4e332d53ba0eb5c27a1a9612244d939a4d44e1156915
+Assign Primary Input [r_ENA_debtor]=a6f387d596d4e40a7137396019c85c9e368ad8d66902f7ae03996ace894e004
+Assign Primary Input [r_H_originalValue_debtor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_H_repayAmountToReceive_creditor]=3534002ed541aaea00743a8fe7b6dd1c19b0fc235106e5f94c222dc0338a9
+Assign Primary Input [r_H_updateValue_debtor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_PKE_repayAmountToReceive_creditor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_SKE_repayAmountToReceive_creditor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_old_ENA_debtor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [repayAmountToReceive_creditor]=989680
+Assign Primary Input [rt]=2b90356c0b3d44f463fd386d2ff2a49640ab6b8ed71f05e88a87b5f5dd72cb4d
+Assign Primary Input [sk_own_debtor]=1518c97131c01db3ef58197145acc36140abaf03e13aaccdb6c3a77454cd12
+Assign Primary Input [u_CT_SKE_bondBalance]=13ff3056e691af93d1242b2eb7e8f0ede9026034a15e18711bda506768a0109c
+Assign Primary Input [update_bondBalance]=55d4a80
+Assign Primary Input [value_ENA_new_debtor]=989680
+Assign Primary Input [value_ENA_old_debtor]=1312d00
+Assign Primary Input [wt]=212bdd196333c892069de8654a83ac511b173b653c7b81661038aec33562e34c
+Assign Primary Input [CT_repayAmountToReceive_creditor][0]=110179a443ee0ed2d6c9369ec985ea52a0c771dd1de878b4b91f9c03d2b90ca8 
+Assign Primary Input [CT_repayAmountToReceive_creditor][1]=1bd3144f94aba770bc4e2e71176ca4d2d26c5edd8c4b65e3408f7e8bd2961bb4 
+Assign Primary Input [CT_repayAmountToReceive_creditor][2]=2822d418e5d2885c18dba086b867c9de6283cc02387866cc6ef3696565bf3808 
+Assign Primary Input [datas_H_repayAmountToReceive_creditor][0]=ce5cbe9fb2c0f7726ebd8ba00a2ece847363e83ae5820b914a229b34e995773 
+Assign Primary Input [datas_H_repayAmountToReceive_creditor][1]=3534002ed541aaea00743a8fe7b6dd1c19b0fc235106e5f94c222dc0338a9 
+Assign Primary Input [datas_H_repayAmountToReceive_creditor][2]=989680 
+Assign Primary Input [monthlyRepaymentTable][0]=68e7780 
+Assign Primary Input [monthlyRepaymentTable][1]=5f5e100 
+Assign Primary Input [monthlyRepaymentTable][2]=55d4a80 
+Assign Primary Input [monthlyRepaymentTable][3]=4c4b400 
+Assign Primary Input [monthlyRepaymentTable][4]=42c1d80 
+Assign Primary Input [monthlyRepaymentTable][5]=3938700 
+Assign Primary Input [monthlyRepaymentTable][6]=2faf080 
+Assign Primary Input [monthlyRepaymentTable][7]=2625a00 
+Assign Primary Input [monthlyRepaymentTable][8]=1c9c380 
+Assign Primary Input [monthlyRepaymentTable][9]=1312d00 
+Assign Primary Input [monthlyRepaymentTable][10]=989680 
+Assign Primary Input [monthlyRepaymentTable][11]=0 
+Running Circuit Evaluator for < RealEstate > Circuit Evaluation Done for < RealEstate >
+
+Parsing and evaluating the inputs
+Map values to protoboard
+Evaluate Inputs Done : Full Assignments:14250 ,  Primary Inputs:18 , Auxiliary Inputs:14232 
+Call to R1CS GG-ppzkSNARK Prover
+End Call to R1CS GG-ppzkSNARK Prover
+Run Proof     : Done
+
+
+Run Proof Profiling Info : 
+
+(enter) Generate Auxiliary Inputs               [             ] (0.0000s x1.15 from start)
+  (enter) generator->evalCircuit()              [             ] (0.0000s x1.01 from start)
+  (leave) generator->evalCircuit()              [0.0124s x1.00] (0.0124s x1.00 from start)
+  (enter) reader_2->evaluate_inputs()           [             ] (0.0124s x1.00 from start)
+    (enter) Parsing and evaluating the inputs   [             ] (0.0124s x1.00 from start)
+    (leave) Parsing and evaluating the inputs   [0.0005s x1.00] (0.0129s x1.00 from start)
+    (enter) Map values to protoboard            [             ] (0.0185s x1.00 from start)
+    (leave) Map values to protoboard            [0.2038s x1.00] (0.2223s x1.00 from start)
+  (leave) reader_2->evaluate_inputs()           [0.2099s x1.00] (0.2223s x1.00 from start)
+(leave) Generate Auxiliary Inputs               [0.2271s x1.00] (0.2271s x1.00 from start)
+(enter) Proof                                   [             ] (0.2320s x1.00 from start)
+  (enter) Call to r1cs_gg_ppzksnark_prover      [             ] (0.2320s x1.00 from start)
+    (enter) swap_AB_if_beneficial               [             ] (0.2320s x1.00 from start)
+      (enter) Call to r1cs_constraint_system::swap_AB_if_beneficial     [             ] (0.2382s x1.00 from start)
+        (enter) Estimate densities                      [             ] (0.2383s x1.00 from start)
+          * Non-zero A-count (estimate): 9918
+          * Non-zero B-count (estimate): 11420
+        (leave) Estimate densities                      [0.0032s x1.00] (0.2414s x1.00 from start)
+        (enter) Perform the swap                        [             ] (0.2414s x1.00 from start)
+        (leave) Perform the swap                        [0.0000s x0.98] (0.2414s x1.00 from start)
+      (leave) Call to r1cs_constraint_system::swap_AB_if_beneficial     [0.0032s x1.00] (0.2414s x1.00 from start)
+    (leave) swap_AB_if_beneficial               [0.0094s x1.00] (0.2415s x1.00 from start)
+    (enter) Compute the polynomial H            [             ] (0.2415s x1.00 from start)
+    (leave) Compute the polynomial H            [0.0829s x2.12] (0.3243s x1.29 from start)
+    (enter) Compute the proof                   [             ] (0.3871s x1.24 from start)
+      (enter) Compute evaluation to A-query             [             ] (0.3872s x1.24 from start)
+      (leave) Compute evaluation to A-query             [0.0579s x7.42] (0.4450s x2.04 from start)
+      (enter) Compute evaluation to B-query             [             ] (0.4450s x2.04 from start)
+      (leave) Compute evaluation to B-query             [0.2236s x8.48] (0.6686s x4.20 from start)
+      (enter) Compute evaluation to H-query             [             ] (0.6686s x4.20 from start)
+      (leave) Compute evaluation to H-query             [0.0748s x7.39] (0.7434s x4.52 from start)
+      (enter) Compute evaluation to L-query             [             ] (0.7435s x4.52 from start)
+      (leave) Compute evaluation to L-query             [0.0613s x7.93] (0.8047s x4.78 from start)
+    (leave) Compute the proof                   [0.4194s x8.03] (0.8066s x4.77 from start)
+  (leave) Call to r1cs_gg_ppzksnark_prover      [0.5745s x6.29] (0.8066s x4.77 from start)
+  * G1 elements in proof: 2
+  * G2 elements in proof: 1
+  * Proof size in bits: 1019
+(leave) Proof                                   [0.5767s x6.27] (0.8087s x4.76 from start)
+<<<<  Proof Json  >>>>
+{
+   "a" : [
+      "0x04FB81DD844B1DBDE0ABAEFD86D8AE36EE62C52131A6FFC67FF7987AFAF8C25C" , 
+      "0x2629EE13B734412D29D6099F0ADB99A9170B1ED9CA1790B4551A519A694613F5"
+   ] , 
+   "b" : [
+      [
+         "0x2694DACCA37BBB286582BE78FC46D074B12D7D7816A48F95089D983994A9A032" , 
+         "0x2954B68391E99993869903DF07B530FCB991FE3CAF83961A3D0D58645262C479"
+      ] , 
+      [
+         "0x0FC83A0EDC9E633F137DF9236BC07E945BA3FBCE5F299DE06721CB9250B292F8" , 
+         "0x21E0A93E93168E6A5B6FE4D3BD7D44E3660F06E012776F567E21EE499A1E94B2"
+      ]
+   ] , 
+   "c" : [
+      "0x252969677FA8CD116AE416F8300402A40D4471DA1689FB953CD6CDE7DC25F251" , 
+      "0x0CEE151CA17420F205DAFC756DE17DAEE03E0DDEEF54F4208CCC16E486D6ADE9"
+   ]
+}
+<<<<              >>>>
+finalize_circuit arguments :
+context_id                 : 3
+Deallocate 32674 Operators , 34244 Wires 
+
+  <<<< 4 , success : using embedded [RealEstate] circuit generator >>>> 
+
+
+
+BuildCircuit  :
+Context_ID    : 4
+Circuit Name  : RealEstate
+Circuit Args  : 
+    hashType : MiMC7 
+    treeHeight : 32 
+Running Circuit Generator for < RealEstate >
+
+Embedded Circuit [RealEstate] Generation Done 
+    Constraints     : 13188 
+    Input Wires     : 18 
+    Output Wires    : 0 
+    Witness Wires   : 1063 
+    List of primary inputs to assign : 
+                - CT_SKE_bondBalance 
+                - CT_creditorPKE_repayAmountToReceive 
+                - ENA_creditor 
+                - ENA_new_debtor 
+                - G_PKE_repayAmountToReceive_creditor 
+                - G_r_PKE_repayAmountToReceive_creditor 
+                - H_monthlyRepaymentTable 
+                - H_originalValue_debtor 
+                - H_repayAmountToReceive_creditor 
+                - H_updateValue_debtor 
+                - PK_enc_creditor 
+                - PK_own_creditor 
+                - bondBalance 
+                - bondKey 
+                - cnt 
+                - k_ENA_debtor 
+                - k_PKE_repayAmountToReceive_creditor 
+                - nf_debtor 
+                - old_CT_SKE_bondBalance 
+                - old_ENA_debtor 
+                - old_bondBalance 
+                - pk_own_debtor 
+                - r_CT_SKE_bondBalance 
+                - r_ENA_debtor 
+                - r_H_originalValue_debtor 
+                - r_H_repayAmountToReceive_creditor 
+                - r_H_updateValue_debtor 
+                - r_PKE_repayAmountToReceive_creditor 
+                - r_SKE_repayAmountToReceive_creditor 
+                - r_old_ENA_debtor 
+                - repayAmountToReceive_creditor 
+                - rt 
+                - sk_own_debtor 
+                - u_CT_SKE_bondBalance 
+                - update_bondBalance 
+                - value_ENA_new_debtor 
+                - value_ENA_old_debtor 
+                - wt 
+                - CT_repayAmountToReceive_creditor , 3 
+                - datas_H_repayAmountToReceive_creditor , 3 
+                - monthlyRepaymentTable , 12 
+        ----------------------------------
+Deallocate 4152 Operators , 4152 Wires 
+create circuit reader 
+numInputs:18 , numOutputs:0 , numNizkInputs:1063 
+Translating Constraints 
+Translating Constraints : Done 
+get constraint system 
+Evaluate Inputs Done : Full Assignments:14250 ,  Primary Inputs:18 , Auxiliary Inputs:14232 
+BuildCircuit  : Done
+
+
+Build Circuit Profiling Info : 
+
+(enter) Build Circuit                           [             ] (0.0000s x0.95 from start)
+  (enter) Create Embedded Circuit               [             ] (0.0000s x1.02 from start)
+  (leave) Create Embedded Circuit               [0.0319s x1.00] (0.0319s x1.00 from start)
+  (enter) Circuit Reader                        [             ] (0.0320s x1.00 from start)
+    (enter) Construct Circuit                   [             ] (0.0326s x0.99 from start)
+    (leave) Construct Circuit                   [1.2609s x1.00] (1.2935s x1.00 from start)
+  (leave) Circuit Reader                        [1.2913s x1.00] (1.3233s x1.00 from start)
+  (enter) Get ConstraintSystem from Gadgetlib2  [             ] (1.3233s x1.00 from start)
+  (leave) Get ConstraintSystem from Gadgetlib2  [0.2036s x1.00] (1.5269s x1.00 from start)
+(leave) Build Circuit                           [1.5269s x1.00] (1.5269s x1.00 from start)
+Read Proof Key from file
+  File : [/Users/mangoo/Documents/LibSNARK_C-/test/RealEstate_crs_pk.dat]
+  
+* G1 elements in PK: 59120
+* Non-zero G1 elements in PK: 54784
+* G2 elements in PK: 14253
+* Non-zero G2 elements in PK: 9918
+* PK size in bits: 19652870
+End of Reading Proof Key from file
+
+Update primary inputs from json : 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_SKE_bondData] ** 
+** Error : Unknown primary input name [CT_creditorPKE_bondKey] **
+** Error : Unknown primary input name [CT_debtorPKE_bondKey] **
+** Error : Unknown primary input name [CT_debtorPKE_loanAmountToReceive] **
+** Error : Unknown primary input name [CT_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [CT_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [CT_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [ENA_debtor] **
+** Error : Unknown primary input name [ENA_new_creditor] **
+** Error : Unknown primary input name [ENA_old_creditor] **
+** Error : Unknown primary input name [G] **
+** Error : Unknown primary input name [G_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [G_r] **
+** Error : Unknown primary input name [G_r_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [H_bondID] **
+** Error : Unknown primary input name [H_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [H_originalValue_creditor] **
+** Error : Unknown primary input name [H_updateValue_creditor] **
+** Error : Unknown primary input name [PK_enc_debtor] **
+** Error : Unknown primary input name [PK_own_debtor] **
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [bondData] ** 
+** Error : Unknown primary input name [datas_H_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [datas_H_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [datas_H_loanAmountToReceive_debtor] ** 
+** Error : Unknown primary input name [direction] **
+** Error : Unknown primary input name [index_bondID] **
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [intermediateHashes] ** 
+** Error : Unknown primary input name [k_ENA_creditor] **
+** Error : Unknown primary input name [k_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [nf_creditor] **
+** Error : Unknown primary input name [pk_own_creditor] **
+** Error : Unknown primary input name [r_CT_SKE_bondData] **
+** Error : Unknown primary input name [r_ENA_creditor] **
+** Error : Unknown primary input name [r_G] **
+** Error : Unknown primary input name [r_H_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [r_H_originalValue_creditor] **
+** Error : Unknown primary input name [r_H_updateValue_creditor] **
+** Error : Unknown primary input name [r_PKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [r_SKE_loanAmountToReceive_debtor] **
+** Error : Unknown primary input name [r_debtorPKE] **
+** Error : Unknown primary input name [r_old_ENA_creditor] **
+** Error : Unknown primary input name [sk_own_creditor] **
+** Error : Unknown primary input name [value_ENA_new_creditor] **
+** Error : Unknown primary input name [value_ENA_old_creditor] **
+
+
+Run Verify    :
+Context_ID    : 4
+Evaluating Inputs
+Assign Primary Input [CT_SKE_bondBalance]=13ff3056e691af93d1242b2eb7e8f0ede9026034a15e18711bda50676a69d41c
+Assign Primary Input [CT_creditorPKE_repayAmountToReceive]=38cf4f19d8289260e07147c39478c48953033dd867534dbda8d7871b49a774e
+Assign Primary Input [ENA_creditor]=5c14950534b40fd5c02c9e24f6b412117254f4633066972c2dbcc8342cfa7ade
+Assign Primary Input [ENA_new_debtor]=16ec918a34bf310e766fc6acfc858110c00c26429d27852be56f293ec2e8b851
+Assign Primary Input [G_PKE_repayAmountToReceive_creditor]=26508f76b759063e3e20f28afcbc769215144e0235f33cfe8c638466ee421c92
+Assign Primary Input [G_r_PKE_repayAmountToReceive_creditor]=28f32225a914076baac673d8791859e215b5a467a540b83a4d15621b7b28fbf1
+Assign Primary Input [H_monthlyRepaymentTable]=10d0907659ea49c4582eedc2305f46b824af401224beb4e9a58eabeed9b18b96
+Assign Primary Input [H_originalValue_debtor]=28355c24b77fbd8b09fb0dd8b8e6e02fdf920993f1bc9a0c64834841a2f071bc
+Assign Primary Input [H_repayAmountToReceive_creditor]=19cd7d82cc950af4fc2bee20897dc610b1b9291fe021a0cdce42ac049055d228
+Assign Primary Input [H_updateValue_debtor]=98d5fa663970cca9f7aeb099d80eede86b37e5f539238fa35b590f72b9a148f
+Assign Primary Input [PK_enc_creditor]=11309f2840bff3f891f1c15651994532f095d6ce68d1771a1ba3e3baca3ede70
+Assign Primary Input [PK_own_creditor]=0
+Assign Primary Input [bondBalance]=7270e00
+Assign Primary Input [bondKey]=37f311b6480079c76dcb85eade8885ef329fe6411a7f8926a73ff40cbbf1b986
+Assign Primary Input [cnt]=1
+Assign Primary Input [k_ENA_debtor]=1201a6dd7c5a1743a172d2648792f2cba39d1d82102d3543fe7b81042edcaf66
+Assign Primary Input [k_PKE_repayAmountToReceive_creditor]=448172f1e79b205c97d4e332d53ba0eb5c27a1a9612244d939a4d44e1156915
+Assign Primary Input [nf_debtor]=e8aaf3c71d35bc3e13950a484637757fe32dbb841654c2e1899dcf00a328f58
+Assign Primary Input [old_CT_SKE_bondBalance]=13ff3056e691af93d1242b2eb7e8f0ede9026034a15e18711bda50676938a71c
+Assign Primary Input [old_ENA_debtor]=e59b1365a0b5981ce658f29c70e8217450e91e34932f53fa0f902b47ba289c2
+Assign Primary Input [old_bondBalance]=5f5e100
+Assign Primary Input [pk_own_debtor]=0
+Assign Primary Input [r_CT_SKE_bondBalance]=448172f1e79b205c97d4e332d53ba0eb5c27a1a9612244d939a4d44e1156915
+Assign Primary Input [r_ENA_debtor]=a6f387d596d4e40a7137396019c85c9e368ad8d66902f7ae03996ace894e004
+Assign Primary Input [r_H_originalValue_debtor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_H_repayAmountToReceive_creditor]=3534002ed541aaea00743a8fe7b6dd1c19b0fc235106e5f94c222dc0338a9
+Assign Primary Input [r_H_updateValue_debtor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_PKE_repayAmountToReceive_creditor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_SKE_repayAmountToReceive_creditor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [r_old_ENA_debtor]=20df22384e4027b68ef8aec3b64d38bd78f01df435518410be3deae9ddba6f16
+Assign Primary Input [repayAmountToReceive_creditor]=989680
+Assign Primary Input [rt]=2b90356c0b3d44f463fd386d2ff2a49640ab6b8ed71f05e88a87b5f5dd72cb4d
+Assign Primary Input [sk_own_debtor]=1518c97131c01db3ef58197145acc36140abaf03e13aaccdb6c3a77454cd12
+Assign Primary Input [u_CT_SKE_bondBalance]=13ff3056e691af93d1242b2eb7e8f0ede9026034a15e18711bda506768a0109c
+Assign Primary Input [update_bondBalance]=55d4a80
+Assign Primary Input [value_ENA_new_debtor]=989680
+Assign Primary Input [value_ENA_old_debtor]=1312d00
+Assign Primary Input [wt]=212bdd196333c892069de8654a83ac511b173b653c7b81661038aec33562e34c
+Assign Primary Input [CT_repayAmountToReceive_creditor][0]=110179a443ee0ed2d6c9369ec985ea52a0c771dd1de878b4b91f9c03d2b90ca8 
+Assign Primary Input [CT_repayAmountToReceive_creditor][1]=1bd3144f94aba770bc4e2e71176ca4d2d26c5edd8c4b65e3408f7e8bd2961bb4 
+Assign Primary Input [CT_repayAmountToReceive_creditor][2]=2822d418e5d2885c18dba086b867c9de6283cc02387866cc6ef3696565bf3808 
+Assign Primary Input [datas_H_repayAmountToReceive_creditor][0]=ce5cbe9fb2c0f7726ebd8ba00a2ece847363e83ae5820b914a229b34e995773 
+Assign Primary Input [datas_H_repayAmountToReceive_creditor][1]=3534002ed541aaea00743a8fe7b6dd1c19b0fc235106e5f94c222dc0338a9 
+Assign Primary Input [datas_H_repayAmountToReceive_creditor][2]=989680 
+Assign Primary Input [monthlyRepaymentTable][0]=68e7780 
+Assign Primary Input [monthlyRepaymentTable][1]=5f5e100 
+Assign Primary Input [monthlyRepaymentTable][2]=55d4a80 
+Assign Primary Input [monthlyRepaymentTable][3]=4c4b400 
+Assign Primary Input [monthlyRepaymentTable][4]=42c1d80 
+Assign Primary Input [monthlyRepaymentTable][5]=3938700 
+Assign Primary Input [monthlyRepaymentTable][6]=2faf080 
+Assign Primary Input [monthlyRepaymentTable][7]=2625a00 
+Assign Primary Input [monthlyRepaymentTable][8]=1c9c380 
+Assign Primary Input [monthlyRepaymentTable][9]=1312d00 
+Assign Primary Input [monthlyRepaymentTable][10]=989680 
+Assign Primary Input [monthlyRepaymentTable][11]=0 
+Running Circuit Evaluator for < RealEstate > Circuit Evaluation Done for < RealEstate >
+
+Parsing and evaluating the inputs
+Map values to protoboard
+Evaluate Inputs Done : Full Assignments:14250 ,  Primary Inputs:18 , Auxiliary Inputs:14232 
+Call to run_r1cs_gg_ppzksnark verify
+Preprocess verification key
+R1CS GG-ppzkSNARK Online Verifier
+Skipping the following pair (4 bit number vs 2 bit):
+9
+3
+Skipping the following pair (2 bit number vs 1 bit):
+2
+1
+* The verification result is: PASS
+End Call to run_r1cs_gg_ppzksnark verify
+Run Verify    : successBit = 1 [ Success ] 
+
+
+Run Verify Profiling Info : 
+
+(enter) Generate Auxiliary Inputs               [             ] (0.0000s x0.85 from start)
+  (enter) generator->evalCircuit()              [             ] (0.0000s x0.95 from start)
+  (leave) generator->evalCircuit()              [0.0126s x1.00] (0.0126s x1.00 from start)
+  (enter) reader_2->evaluate_inputs()           [             ] (0.0126s x1.00 from start)
+    (enter) Parsing and evaluating the inputs   [             ] (0.0126s x1.00 from start)
+    (leave) Parsing and evaluating the inputs   [0.0005s x1.00] (0.0130s x1.00 from start)
+    (enter) Map values to protoboard            [             ] (0.0186s x1.00 from start)
+    (leave) Map values to protoboard            [0.2013s x1.00] (0.2199s x1.00 from start)
+  (leave) reader_2->evaluate_inputs()           [0.2073s x1.00] (0.2199s x1.00 from start)
+(leave) Generate Auxiliary Inputs               [0.2252s x1.00] (0.2252s x1.00 from start)
+(enter) Verify                                  [             ] (0.2307s x1.00 from start)
+  (enter) Call to r1cs_gg_ppzksnark_verifier_process_vk [             ] (0.2307s x1.00 from start)
+  (leave) Call to r1cs_gg_ppzksnark_verifier_process_vk [0.0010s x1.00] (0.2316s x1.00 from start)
+  (enter) Call to r1cs_gg_ppzksnark_online_verifier_strong_IC   [             ] (0.2318s x1.00 from start)
+    (enter) Call to r1cs_gg_ppzksnark_online_verifier_weak_IC   [             ] (0.2319s x1.00 from start)
+      (enter) Accumulate input                          [             ] (0.2319s x1.00 from start)
+      (leave) Accumulate input                          [0.0007s x2.74] (0.2325s x1.00 from start)
+      (enter) Check if the proof is well-formed         [             ] (0.2325s x1.00 from start)
+      (leave) Check if the proof is well-formed         [0.0000s x0.96] (0.2325s x1.00 from start)
+      (enter) Online pairing computations               [             ] (0.2325s x1.00 from start)
+        (enter) Check QAP divisibility                  [             ] (0.2325s x1.00 from start)
+        (leave) Check QAP divisibility                  [0.0057s x1.00] (0.2382s x1.00 from start)
+      (leave) Online pairing computations               [0.0057s x1.00] (0.2382s x1.00 from start)
+    (leave) Call to r1cs_gg_ppzksnark_online_verifier_weak_IC   [0.0064s x1.18] (0.2382s x1.00 from start)
+  (leave) Call to r1cs_gg_ppzksnark_online_verifier_strong_IC   [0.0064s x1.18] (0.2382s x1.00 from start)
+(leave) Verify                                  [0.0076s x1.15] (0.2383s x1.00 from start)
+
+ Verify 1 :   <<<< 0 , success >>>> 
+
+finalize_circuit arguments :
+context_id                 : 4
+Deallocate 32674 Operators , 34244 Wires 
+    ~/Documents/LibSNARK_C-/test    main !9                                                                                       ✔  9s  

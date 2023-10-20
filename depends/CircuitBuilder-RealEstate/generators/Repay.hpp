@@ -39,7 +39,7 @@ namespace RealEstate {
 
         WirePtr  bondKey, old_bondBalance, bondBalance, r_H_repayAmountToReceive_creditor;
 
-		WirePtr PK_enc_creditor, ENA_debtor, ENA_creditor, old_ENA_debtor, r_CT_SKE_bondBalance;
+		WirePtr PK_enc_creditor, ENA_new_debtor, ENA_creditor, old_ENA_debtor, r_CT_SKE_bondBalance;
 		WirePtr r_H_originalValue_debtor, sk_own_debtor, r_H_updateValue_debtor;
 		WirePtr G_PKE_repayAmountToReceive_creditor, r_PKE_repayAmountToReceive_creditor;
 		WirePtr k_PKE_repayAmountToReceive_creditor, r_SKE_repayAmountToReceive_creditor;

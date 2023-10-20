@@ -44,9 +44,8 @@ namespace CircuitBuilder
     namespace RealEstate
     {
 
-        LiquidateCollateral::LiquidateCollateral(string circuitName, int __treeHeight, const BigInteger &__G1_GENERATOR, Config &config)
+        LiquidateCollateral::LiquidateCollateral(string circuitName, const BigInteger &__G1_GENERATOR, Config &config)
             : CircuitBuilder::CircuitGenerator(circuitName, config),
-              treeHeight(__treeHeight),
               G1_GENERATOR(__G1_GENERATOR)
         {
         }
@@ -58,12 +57,11 @@ namespace CircuitBuilder
             H_monthlyRepaymentTable = createInputWire("H_monthlyRepaymentTable"); // CT_table
             cnt = createInputWire("cnt");
 
-
             // /* witnesses */
             monthlyRepaymentTable = createProverWitnessWireArray(tableBalanceLength, "monthlyRepaymentTable"); //table_balance
             bondBalance = createProverWitnessWire("bondBalance"); //bond_balance
             bondKey = createProverWitnessWire("bondKey"); //k_msg
-
+            r_CT_SKE_bondBalance = createProverWitnessWire("r_CT_SKE_bondBalance"); //r_update_bond_balance
 
             vector<WirePtr> nextInputWires;
             HashGadget *hashGadget;
@@ -74,19 +72,22 @@ namespace CircuitBuilder
             }
             hashGadget = allocate<HashGadget>(this, nextInputWires);
             addEqualityAssertion(hashGadget->getOutputWires()[0], H_monthlyRepaymentTable, "H_monthlyRepaymentTable != H(monthlyRepaymentTable)");
-
             
-            // bondBalance = SKE.Dec(bondKey, CT_SKE_bondBalance)
-            DecryptionGadget *decGadget = allocate<DecryptionGadget>(this, *CT_SKE_bondBalance, bondKey);
-            addEqualityAssertion(decGadget->getOutputWires()[0], bondBalance, "bondBalance not equal");
+            // // bondBalance = SKE.Dec(bondKey, CT_SKE_bondBalance)
+            // DecryptionGadget *decGadget = allocate<DecryptionGadget>(this, *CT_SKE_bondBalance, bondKey);
+            // addEqualityAssertion(decGadget->getOutputWires()[0], bondBalance, "bondBalance not equal");
 
-            //monthlyRepaymentTable[cnt] < bondBalance
-            BigInteger cntBigInteger = ((ConstantWire*) cnt)->getConstant();
-            string cntString = cntBigInteger.toString();
+            //CT_SKE_bondBalance = SKE.Enc(bondKey, bondBalance)
+            nextInputWires = {bondKey, r_CT_SKE_bondBalance};
+            hashGadget = allocate<HashGadget>(this, nextInputWires);
+            addEqualityAssertion(bondBalance->add(hashGadget->getOutputWires()[0]),CT_SKE_bondBalance, "invalid CT_SKE_bondBalance");
+
+        //     //monthlyRepaymentTable[cnt] < bondBalance
+            // BigInteger cntBigInteger = ((ConstantWire*) cnt)->getConstant();
+            // string cntString = cntBigInteger.toString();
            // stol(cntString)
 
-            addOneAssertion(monthlyRepaymentTable->get(stol(cntString))->isLessThan(bondBalance, config.LOG2_FIELD_PRIME - 1),"monthlyRepaymentTable[cnt] >= bondBalance");
-            
+            addOneAssertion((monthlyRepaymentTable->get(2))->isLessThan(bondBalance, config.LOG2_FIELD_PRIME - 1),"monthlyRepaymentTable[cnt] >= bondBalance");
 
             return;
         }
@@ -190,7 +191,7 @@ namespace libsnark
         config.proverWitnessWires_size = 2080;
         config.hashType = hashType;
 
-        auto generator = new CircuitBuilder::RealEstate::LiquidateCollateral("RealEstate", treeHeight, G1_GENERATOR, config);
+        auto generator = new CircuitBuilder::RealEstate::LiquidateCollateral("RealEstate", G1_GENERATOR, config);
         generator->generateCircuit();
 
         return generator;

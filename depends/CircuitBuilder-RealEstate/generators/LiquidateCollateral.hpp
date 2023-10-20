@@ -20,20 +20,15 @@ namespace RealEstate {
 	private:
 
 		/********************* INPUT ***************************/
-        WirePtr CT_SKE_bondBalance, H_monthlyRepaymentTable, cnt;
+    WirePtr CT_SKE_bondBalance, H_monthlyRepaymentTable, cnt;
 		
 		/********************* Witness ***************************/
         
-        WirePtr bondBalance, bondKey;
+    WirePtr bondBalance, bondKey;
 		WiresPtr monthlyRepaymentTable;
+		WirePtr r_CT_SKE_bondBalance;
 
 		/********************* MerkleTree ***************************/
-		WirePtr directionSelector;
-		WiresPtr intermediateHashWires;
-		static const int PKECipherLength = 3;
-		static const int SECipherLength = 2;
-		static const int pkLength = 3;
-		int treeHeight;
 		BigInteger G1_GENERATOR;
 
 		static const int bondDataLength = 13;
@@ -48,7 +43,7 @@ namespace RealEstate {
 
 	public: 
 
-		LiquidateCollateral(string circuitName, int treeHeight , const BigInteger & G1_GENERATOR , Config &config) ;
+		LiquidateCollateral(string circuitName, const BigInteger & G1_GENERATOR , Config &config) ;
 		
 		void assignInputs(CircuitEvaluator &evaluator) ;
 

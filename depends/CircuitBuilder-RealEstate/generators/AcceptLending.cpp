@@ -62,7 +62,7 @@ namespace CircuitBuilder
             CT_creditorPKE_bondKey = createInputWire("CT_creditorPKE_bondKey"); //채권자의 pk로 Enc     CT_creditorKey
             H_monthlyRepaymentTable = createInputWire("H_monthlyRepaymentTable");         // CT_table
 
-            H_loanAmountToReceive_debtor = createInputWire("H_loanAmountToReceiev_debtor");         // C_v_debtor
+            H_loanAmountToReceive_debtor = createInputWire("H_loanAmountToReceive_debtor");         // C_v_debtor
             PK_own_debtor = createInputWire("PK_own_debtor"); 
             
             CT_loanAmountToReceive_debtor = createInputWireArray(3, "CT_loanAmountToReceive_debtor"); // 수정 원래는 위에.
@@ -86,7 +86,7 @@ namespace CircuitBuilder
             PK_enc_debtor = createProverWitnessWire("PK_enc_debtor");
 
             ENA_debtor = createProverWitnessWire("ENA_debtor");
-            ENA_new_creditor = createProverWitnessWire("ENA__new_creditor");
+            ENA_new_creditor = createProverWitnessWire("ENA_new_creditor");
             ENA_old_creditor = createProverWitnessWire("ENA_old_creditor"); //old_ENA_creditor
 
             value_ENA_old_creditor = createProverWitnessWire("value_ENA_old_creditor");//, 이전 ENA 잔고  value_old_creditor

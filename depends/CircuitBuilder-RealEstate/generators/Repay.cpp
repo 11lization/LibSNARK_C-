@@ -117,28 +117,31 @@ namespace CircuitBuilder
             vector<WirePtr> nextInputWires;
             HashGadget *hashGadget;
 
-
+            //원래 2000만, 보낸 후 1000만
             //v' = v+ v'' (이전 ENA 잔고(value_ENA_old_debtor), 채무자가 돈 보낸 후 ENA 잔고(value_ENA_new_debtor),채무자가 채권자한테 보내야할 돈(repayAmountToReceive_creditor))
             WirePtr v_eval = value_ENA_new_debtor->add(repayAmountToReceive_creditor);
             addEqualityAssertion(value_ENA_old_debtor, v_eval, "invalid value_ENA_old_debtor");
 
-             // old_bondBalance = SKE.Dec(bondKey, old_CT_SKE_bondBalance) -> 이전
-            DecryptionGadget *decGadget2 = allocate<DecryptionGadget>(this, *old_CT_SKE_bondBalance, bondKey);
-            WirePtr old_bondBalance = decGadget2->getOutputWires()[0];
+            // old_bondBalance = SKE.Dec(bondKey, old_CT_SKE_bondBalance) -> 이전
+            // DecryptionGadget *decGadget2 = allocate<DecryptionGadget>(this, *old_CT_SKE_bondBalance, bondKey);
+            // WirePtr old_bondBalance = decGadget2->getOutputWires()[0];
+
+             // old_CT_SKE_bondBalance = SKE.Enc(bondKey, old_bondBalance)
+            nextInputWires = {bondKey, r_CT_SKE_bondBalance};
+            hashGadget = allocate<HashGadget>(this, nextInputWires);
+            addEqualityAssertion(old_bondBalance->add(hashGadget->getOutputWires()[0]),old_CT_SKE_bondBalance, "invalid old_CT_SKE_bondBalance");
 
             //bondBalance = old_bondBalance - repayAmountToReceive_creditor (update = old - 채권자한테 보내야할 돈)
             WirePtr result = old_bondBalance->sub(repayAmountToReceive_creditor);
-            addEqualityAssertion(result, bondBalance, "bondBalance not equal result");
-
+            addEqualityAssertion(result, update_bondBalance, "bondBalance not equal result");
 
             //CT_SKE_bondBalance = SKE.Enc(bondKey, bondBalance) : 업데이트가 잘 되었는지 
             nextInputWires = {bondKey, r_CT_SKE_bondBalance}; //r_update_bond_balance
             hashGadget = allocate<HashGadget>(this, nextInputWires);
-            addEqualityAssertion(bondBalance->add(hashGadget->getOutputWires()[0]),CT_SKE_bondBalance, "invalid CT_SKE_bondBalance");
-
+            addEqualityAssertion(update_bondBalance->add(hashGadget->getOutputWires()[0]),u_CT_SKE_bondBalance, "invalid CT_SKE_bondBalance");
 
             //돈 보내는 부분
-            //H_originalValue_debtor = H(pk_own_debtor, r_H_originalValue_debtor, value_ENA_old_debtor)  
+           //H_originalValue_debtor = H(pk_own_debtor, r_H_originalValue_debtor, value_ENA_old_debtor)  
             nextInputWires = {pk_own_debtor, r_H_originalValue_debtor, value_ENA_old_debtor};
             hashGadget = allocate<HashGadget>(this, nextInputWires);
             addEqualityAssertion(hashGadget->getOutputWires()[0], H_originalValue_debtor, "H_originalValue_debtor not equal");
@@ -164,18 +167,16 @@ namespace CircuitBuilder
             addEqualityAssertion(hashGadget->getOutputWires()[0], H_updateValue_debtor, "H_updateValue_debtor not equal");
 
             // membership check
-            Wires leafWires = {H_originalValue_debtor};
-            MerkleTreePathGadget *merkleTreeGadget = allocate<MerkleTreePathGadget>(this, directionSelector, leafWires, *intermediateHashWires, treeHeight, true);
+            Wires leafWires = {wt};
+            MerkleTreePathGadget *merkleTreeGadget = allocate<MerkleTreePathGadget>(this, direction, leafWires, *intermediateHashes, treeHeight, true);
             addOneAssertion(value_ENA_old_debtor->isEqualTo(zeroWire)->add(rt->isEqualTo(merkleTreeGadget->getOutputWires()[0]))->checkNonZero(),
                             "membership failed");
-
-
 
             // 여기 수정!! -> 쓸 수 있게 값들 ENC
             //c_0 = G^r    -> G_r_PKE_repayAmountToReceive_creditor = G_PKE_repayAmountToReceive_creditor^r_PKE_repayAmountToReceive_creditor
             ECGroupGeneratorGadget *ecGadget = allocate<ECGroupGeneratorGadget>(this, G_PKE_repayAmountToReceive_creditor, r_PKE_repayAmountToReceive_creditor);
             addEqualityAssertion(ecGadget->getOutputWires()[0], G_r_PKE_repayAmountToReceive_creditor, "G_r_PKE_repayAmountToReceive_creditor not equal");
-            
+
             //c_1 = k*pk_1^r  -> CT_creditorPKE_repayAmountToReceive = k_PKE_repayAmountToReceive_creditor * PK_enc_creditor^r_PKE_repayAmountToReceive_creditor
             ecGadget = allocate<ECGroupGeneratorGadget>(this, PK_enc_creditor, r_PKE_repayAmountToReceive_creditor);
             addEqualityAssertion(ecGadget->getOutputWires()[0]->mul(k_PKE_repayAmountToReceive_creditor), CT_creditorPKE_repayAmountToReceive, "CT_creditorPKE_repayAmountToReceive not equal");
@@ -215,11 +216,10 @@ namespace CircuitBuilder
 
 
             // bond_balance_update = table[cnt]
-            BigInteger cntBigInteger = ((ConstantWire*) cnt)->getConstant();
-            string cntString = cntBigInteger.toString();
+            // BigInteger cntBigInteger = ((ConstantWire*) cnt)->getConstant();
+            // string cntString = cntBigInteger.toString();
            // stol(cntString)
-            addEqualityAssertion(monthlyRepaymentTable->get(stol(cntString)), bondBalance,"bondBalance_update != table[cnt]");
-            
+            addEqualityAssertion((monthlyRepaymentTable->get(2)), update_bondBalance,"bondBalance_update != table[cnt]");
           
 
 

@@ -22,7 +22,7 @@ namespace RealEstate {
 
 		/********************* INPUT ***************************/
 
-		WirePtr CT_SKE_bondBalance, old_CT_SKE_bondBalance, cnt;
+		WirePtr u_CT_SKE_bondBalance, CT_SKE_bondBalance, old_CT_SKE_bondBalance, cnt;
 
 		WirePtr PK_own_creditor, pk_own_debtor;
 		WirePtr H_repayAmountToReceive_creditor; 
@@ -43,12 +43,13 @@ namespace RealEstate {
 		WirePtr r_H_originalValue_debtor, sk_own_debtor, r_H_updateValue_debtor;
 		WirePtr G_PKE_repayAmountToReceive_creditor, r_PKE_repayAmountToReceive_creditor;
 		WirePtr k_PKE_repayAmountToReceive_creditor, r_SKE_repayAmountToReceive_creditor;
-		WirePtr k_ENA_debtor, r_ENA_debtor, r_old_ENA_debtor;
+		WirePtr k_ENA_debtor, r_ENA_debtor, r_old_ENA_debtor, wt;
 
 		WiresPtr datas_H_repayAmountToReceive_creditor, monthlyRepaymentTable;
+		WirePtr update_bondBalance;
 		/********************* MerkleTree ***************************/
-		WirePtr directionSelector;
-		WiresPtr intermediateHashWires;
+		WirePtr direction;
+		WiresPtr intermediateHashes;
 		static const int CTLength = 3;
 		static const int ctLength = 2;
 		static const int pkLength = 3;

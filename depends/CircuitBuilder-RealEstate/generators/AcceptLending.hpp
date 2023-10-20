@@ -42,11 +42,11 @@ namespace RealEstate {
 		
 		WiresPtr monthlyRepaymentTable;
 
-		WirePtr G_r, SK_enc_creditor, bondKey;
+		WirePtr SK_enc_creditor, bondKey;
 
 		WirePtr k_ENA_creditor;
 
-		WirePtr r_H_loanAmountToReceive_debtor, r;
+		WirePtr r_H_loanAmountToReceive_debtor;
 		WirePtr r_ENA_creditor, r_old_ENA_creditor;
 
 
